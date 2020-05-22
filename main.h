@@ -12,6 +12,7 @@
 #include <set>
 #include <iomanip>
 #include <bitset>
+#include <SDL.h>
 #define ll long long
 #define ld long double
 #define endl '\n'
