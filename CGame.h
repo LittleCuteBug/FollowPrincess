@@ -1,5 +1,42 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\CPlayer.h>
 #include<C:\Users\quang\Desktop\FollowPrincess\CMap.h>
+#include<C:\Users\quang\Desktop\FollowPrincess\SDLFunc.h>
+void CMap::SDLRenderingGame()
+{
+	for(int i=0;i<MapSize;i++)
+	{
+		for(int j=0;j<MapSize;j++)
+		{
+			double x = j*SCREEN_WIDTH/MapSize;
+			double y = i*SCREEN_HEIGHT/MapSize;
+			double w = SCREEN_WIDTH/MapSize;
+			double h = SCREEN_HEIGHT/MapSize;
+			RenderImage(gImage[MapSafeCellImage],x,y,w,h);
+		}
+	}
+
+	RenderImage(gImage[MapStartCellImage],
+		0,
+		0,
+		SCREEN_WIDTH/MapSize,
+		SCREEN_HEIGHT/MapSize);
+
+	RenderImage(gImage[MapFinishCellImage],
+		(MapSize-1)*SCREEN_WIDTH/MapSize,
+		(MapSize-1)*SCREEN_HEIGHT/MapSize,
+		SCREEN_WIDTH/MapSize,
+		SCREEN_HEIGHT/MapSize);
+
+	RenderImage(gImage[PrincessImage],
+		y*SCREEN_WIDTH/MapSize,
+		x*SCREEN_HEIGHT/MapSize,
+		SCREEN_WIDTH/MapSize,
+		SCREEN_HEIGHT/MapSize);
+}
+void CPlayer::SDLRenderingGame()
+{
+	;
+}
 class CGame
 {
 private:
@@ -30,6 +67,11 @@ public:
 		Player.Print();
 		Map.PrintGame();
 	}
+	void SDLRenderingGame()
+	{
+		Player.SDLRenderingGame();
+		Map.SDLRenderingGame();
+	}
 	void Reset()
 	{
 		Player.LifeDecrease();
@@ -43,35 +85,31 @@ public:
 	{
 		cout<<"CannotMove"<<endl;
 	}
-	bool Move(char c)
+	bool Move(int c)
 	{
 		switch (c)
 		{
-			case 68:
-			case 'a':
-			{
-				if(!Map.goLeft())
-					CannotMove();
-				return true;
-			}
-			case 67:
-			case 'd':
-			{
-				if(!Map.goRight())
-					CannotMove();
-				return true;
-			}
-			case 65:
-			case 'w':
+			case GoUpKey:
 			{
 				if(!Map.goUp())
 					CannotMove();
 				return true;
 			}
-			case 66:
-			case 's':
+			case GoDownKey:
 			{
 				if(!Map.goDown())
+					CannotMove();
+				return true;
+			}
+			case GoLeftKey:
+			{
+				if(!Map.goLeft())
+					CannotMove();
+				return true;
+			}
+			case GoRightKey:
+			{
+				if(!Map.goRight())
 					CannotMove();
 				return true;
 			}

@@ -1,37 +1,85 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\main.h>
-#include<C:\Users\quang\Desktop\FollowPrincess\CGame.h>
+#include<C:\Users\quang\Desktop\FollowPrincess\Cgame.h>
 int main(int argc, char* args[])
 {
-	CGame Game;
-	Game.PrintMap();
-	Game.PrintGame();
-	while(true)
+	//Start up SDL and create window
+	if( !init() )
 	{
-		char c;
-		c = cin.get();
-		if(Game.Move(c))
+		printf( "Failed to initialize!\n" );
+	}
+	else
+	{
+		//Load media
+		if( !loadMedia() )
 		{
-			Game.PrintGame();
-			if(Game.isBomb())
+			printf( "Failed to load media!\n" );
+		}
+		else
+		{	
+			//Main loop flag
+			bool quit = false;
+
+			//Event handler
+			SDL_Event e;
+			CGame Game;
+			Game.SDLRenderingGame();
+			//While application is running
+			while( !quit )
 			{
-				cout<<"Bang"<<endl;
-				c = cin.get();
-				Game.Reset();
-				Game.PrintGame();
-			}
-			if(Game.isDead())
-			{
-				cout<<"Lose"<<endl;
-				c = cin.get();
-				break;
-			}
-			if(Game.isWinning())
-			{
-				cout<<"Win"<<endl;
-				c = cin.get();
-				Game.NextLevel();
-				Game.PrintGame();
+				//Handle events on queue
+				while( SDL_PollEvent( &e ) != 0 )
+				{
+					//User requests quit
+					if( e.type == SDL_QUIT )
+					{
+						quit = true;
+					}
+
+					else if( e.type == SDL_KEYDOWN )
+					{
+						//Select surfaces based on key press
+						switch( e.key.keysym.sym )
+						{
+							case SDLK_UP:
+								Game.Move(GoUpKey);
+							break;
+							case SDLK_DOWN:
+								Game.Move(GoDownKey);
+							break;
+							case SDLK_LEFT:
+								Game.Move(GoLeftKey);
+							break;
+							case SDLK_RIGHT:
+								Game.Move(GoRightKey);
+							break;
+						}
+					}
+				}	
+				if(Game.isBomb())
+				{
+					Game.Reset();
+				}
+				if(Game.isDead())
+				{
+					cout << "Lose" << endl;
+					quit = true;
+					break;
+				}
+				if(Game.isWinning())
+				{
+					cout<<"Win"<<endl;
+					Game.NextLevel();
+				}
+				Game.SDLRenderingGame();
+				//Update the surface
+				SDL_UpdateWindowSurface( gWindow );
+
 			}
 		}
 	}
+
+	//Free resources and close SDL
+	close();
+
+	return 0;
 }

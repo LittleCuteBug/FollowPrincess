@@ -37,4 +37,5 @@ class CPlayer
 		{
 			cout<<"Life: "<<Life<<" Level: "<<Level<<endl;
 		}
+		void SDLRenderingGame();
 	};

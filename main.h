@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <cstdio>
 #include <cmath>
 #include <algorithm>
@@ -13,6 +14,8 @@
 #include <iomanip>
 #include <bitset>
 #include <SDL.h>
+#include <SDL_image.h>
+
 #define ll long long
 #define ld long double
 #define endl '\n'

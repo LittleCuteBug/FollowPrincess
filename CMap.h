@@ -79,5 +79,6 @@ public:
 					cout << "o ";
 			cout << endl;
 		}
-	}	
+	}
+	void SDLRenderingGame();	
 };
