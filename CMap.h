@@ -1,13 +1,17 @@
 class CMap
 {
 private:
-	vector<vector<int> > MapArray;
+	int MapArray[100][100];
 	int x, y, MapSize;
-
-
-	void Setpath(int u, int v);
+	int t[2][4] = {{0,0,1,-1},{1,-1,0,0}};
+	bool flag = false;
+	bool Check(int u,int v);
+	void DFS(int u,int v);
+	bool Valid();
+	void SetPath();
 public:
 	// Position
+	static int myrandom (int i);
 	void AssignNewPosition(int _x = 0, int _y = 0);
 	bool isBomb();
 	bool isWinning();

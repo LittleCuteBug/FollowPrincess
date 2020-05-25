@@ -1,13 +1,56 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\main.h>
 #include<C:\Users\quang\Desktop\FollowPrincess\CMap.h>
 
-void CMap::Setpath(int u, int v){
-	// will work later
-	for (int i = 0; i < MapSize; i++)
-		MapArray[i][0] = 0;
-	for (int j = 0; j < MapSize; j++)
-		MapArray[MapSize - 1][j] = 0;
+int CMap::myrandom (int i) { return std::rand()%i;}
+bool CMap::Check(int u,int v)
+{
+	return u>=0&&u<MapSize&&v>=0&&v<MapSize&&MapArray[u][v]==0;
 }
+void CMap::DFS(int u,int v)
+{
+	if(u==MapSize-1&&v==MapSize-1)
+	{
+		flag = true;
+		return;
+	}
+	if(MapArray[u][v]==1)
+		return;
+	for(int i=0;i<4;i++)
+	{
+		if(Check(u+t[0][i],v+t[1][i]))
+		{
+			MapArray[u+t[0][i]][v+t[1][i]] = -1;
+			DFS(u+t[0][i],v+t[1][i]);
+		}
+	}
+}
+bool CMap::Valid()
+{
+	flag = false;
+	DFS(0,0);
+	for(int i=0;i<MapSize;i++)
+		for(int j=0;j<MapSize;j++)
+			if(MapArray[i][j]==-1) MapArray[i][j] = 0;
+	return flag;
+}
+void CMap::SetPath()
+{
+	srand( time( NULL ) );
+	vector<int> Index;
+	for(int i=0;i<MapSize*MapSize;i++)
+		Index.push_back(i);
+	std::random_shuffle(Index.begin(),Index.end(),myrandom);
+	for(int i=0;i<MapSize*MapSize;i++)
+	{
+		int u = Index[i]%MapSize;
+		int v = Index[i]/MapSize;
+		MapArray[u][v] = 1;
+		//cout<<"Erase: "<<u<<" "<<v<<endl;
+		if(!Valid())
+			MapArray[u][v]= 0;
+	}
+}
+
 void CMap::AssignNewPosition(int _x, int _y)
 {
 	x = _x;
@@ -35,15 +78,8 @@ void CMap::PrintPosition()
 void CMap::AssignNewMap(int _MapSize)
 {
 	MapSize = _MapSize;
-	MapArray.clear();
-	for (int i = 0; i < _MapSize; i++)
-	{
-		vector<int> v;
-		for (int j = 0; j < _MapSize; j++)
-			v.push_back(1);
-		MapArray.push_back(v);
-	}
-	Setpath(0, 0);
+	fill_n(&MapArray[0][0],sizeof(MapArray)/sizeof(MapArray[0][0]),0);
+	SetPath();
 }
 void CMap::NextLevel()
 {
