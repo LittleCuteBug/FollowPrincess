@@ -13,8 +13,11 @@
 #include <set>
 #include <iomanip>
 #include <bitset>
+#include <ctime>
+#include <cstdlib>
 #include <SDL.h>
 #include <SDL_image.h>
+
 
 #define ll long long
 #define ld long double

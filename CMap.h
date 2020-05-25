@@ -3,10 +3,10 @@ class CMap
 private:
 	int MapArray[100][100];
 	int x, y, MapSize;
-	int t[2][4] = {{0,0,1,-1},{1,-1,0,0}};
+	int t[2][4] = {{0, 0, 1, -1}, {1, -1, 0, 0}};
 	bool flag = false;
-	bool Check(int u,int v);
-	void DFS(int u,int v);
+	bool Check(int u, int v);
+	void DFS(int u, int v);
 	bool Valid();
 	void SetPath();
 public:
@@ -25,5 +25,5 @@ public:
 	void NextLevel();
 	void PrintMap();
 	void PrintGame();
-	void SDLRenderingGame();	
+	void SDLRenderingGame();
 };

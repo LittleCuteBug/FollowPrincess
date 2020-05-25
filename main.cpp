@@ -3,71 +3,70 @@
 int main(int argc, char* args[])
 {
 	//Start up SDL and create window
-	if( !init() )
+	if ( !init() )
 	{
 		printf( "Failed to initialize!\n" );
 	}
 	else
 	{
 		//Load media
-		if( !loadMedia() )
+		if ( !loadMedia() )
 		{
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{	
+		{
 			//Main loop flag
 			bool quit = false;
 
 			//Event handler
 			SDL_Event e;
 			CGame Game;
-			Game.SDLRenderingGame();
 			//While application is running
-			while( !quit )
+			while ( !quit )
 			{
 				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
+				while ( SDL_PollEvent( &e ) != 0 )
 				{
 					//User requests quit
-					if( e.type == SDL_QUIT )
+					if ( e.type == SDL_QUIT )
 					{
 						quit = true;
 					}
 
-					else if( e.type == SDL_KEYDOWN )
+					else if ( e.type == SDL_KEYDOWN )
 					{
 						//Select surfaces based on key press
-						switch( e.key.keysym.sym )
+						switch ( e.key.keysym.sym )
 						{
-							case SDLK_UP:
-								Game.Move(GoUpKey);
+						case SDLK_UP:
+							Game.Move(GoUpKey);
 							break;
-							case SDLK_DOWN:
-								Game.Move(GoDownKey);
+						case SDLK_DOWN:
+							Game.Move(GoDownKey);
 							break;
-							case SDLK_LEFT:
-								Game.Move(GoLeftKey);
+						case SDLK_LEFT:
+							Game.Move(GoLeftKey);
 							break;
-							case SDLK_RIGHT:
-								Game.Move(GoRightKey);
+						case SDLK_RIGHT:
+							Game.Move(GoRightKey);
 							break;
 						}
 					}
-				}	
-				if(Game.isBomb())
+				}
+				if (Game.isBomb())
 				{
 					Game.Reset();
 				}
-				if(Game.isDead())
+				if (Game.isDead())
 				{
 					cout << "Lose" << endl;
 					quit = true;
 					break;
 				}
-				if(Game.isWinning())
+				if (Game.isWinning())
 				{
-					cout<<"Win"<<endl;
+					cout << "Win" << endl;
 					Game.NextLevel();
 				}
 				Game.SDLRenderingGame();

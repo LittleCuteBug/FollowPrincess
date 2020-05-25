@@ -3,9 +3,9 @@
 
 CPlayer::CPlayer(int _Life, int _Level)
 {
-	Setter(_Life,_Level);
+	Setter(_Life, _Level);
 }
-void CPlayer::Setter(int _Life, int _Level){
+void CPlayer::Setter(int _Life, int _Level) {
 	Level = _Level;
 	Life = _Life;
 }

@@ -2,7 +2,7 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\SDLFunc.h>
 
 SDL_Window* gWindow = NULL;
-	
+
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
@@ -22,7 +22,7 @@ bool init()
 	bool success = true;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 		success = false;
@@ -31,7 +31,7 @@ bool init()
 	{
 		//Create window
 		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
+		if ( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
 			success = false;
@@ -40,7 +40,7 @@ bool init()
 		{
 			//Initialize PNG loading
 			int imgFlags = IMG_INIT_PNG;
-			if( !( IMG_Init( imgFlags ) & imgFlags ) )
+			if ( !( IMG_Init( imgFlags ) & imgFlags ) )
 			{
 				printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 				success = false;
@@ -58,10 +58,10 @@ bool init()
 void RenderImage(SDL_Surface* Image, double x, double y, double w, double h)
 {
 	SDL_Rect stretchRect;
-	stretchRect.x = x-1;
-	stretchRect.y = y-1;
-	stretchRect.w = w+2;
-	stretchRect.h = h+2;
+	stretchRect.x = x - 1;
+	stretchRect.y = y - 1;
+	stretchRect.w = w + 2;
+	stretchRect.h = h + 2;
 	SDL_BlitScaled(Image, NULL, gScreenSurface, &stretchRect);
 }
 SDL_Surface* loadSurface( std::string path )
@@ -71,7 +71,7 @@ SDL_Surface* loadSurface( std::string path )
 
 	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
+	if ( loadedSurface == NULL )
 	{
 		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
 	}
@@ -79,7 +79,7 @@ SDL_Surface* loadSurface( std::string path )
 	{
 		//Convert surface to screen format
 		optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0 );
-		if( optimizedSurface == NULL )
+		if ( optimizedSurface == NULL )
 		{
 			printf( "Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
 		}
@@ -97,12 +97,12 @@ bool loadMedia()
 	bool success = true;
 
 	//Load PNG surface
-	for(int i=0;i<NumberOfImage;i++)
+	for (int i = 0; i < NumberOfImage; i++)
 	{
 		gImage[i] = loadSurface( Imagepath[i] );
-		if( gImage[i] == NULL )
+		if ( gImage[i] == NULL )
 		{
-			printf( "Failed to load ",Imagepath, "\n" );
+			printf( "Failed to load ", Imagepath, "\n" );
 			success = false;
 		}
 	}
@@ -112,7 +112,7 @@ bool loadMedia()
 void close()
 {
 	//Free loaded image
-	for(int i=0;i<NumberOfImage;i++)
+	for (int i = 0; i < NumberOfImage; i++)
 		gImage[i] = NULL;
 
 	//Destroy window

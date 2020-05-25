@@ -1,53 +1,53 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\main.h>
 #include<C:\Users\quang\Desktop\FollowPrincess\CMap.h>
 
-int CMap::myrandom (int i) { return std::rand()%i;}
-bool CMap::Check(int u,int v)
+int CMap::myrandom (int i) { return std::rand() % i;}
+bool CMap::Check(int u, int v)
 {
-	return u>=0&&u<MapSize&&v>=0&&v<MapSize&&MapArray[u][v]==0;
+	return u >= 0 && u < MapSize && v >= 0 && v < MapSize && MapArray[u][v] == 0;
 }
-void CMap::DFS(int u,int v)
+void CMap::DFS(int u, int v)
 {
-	if(u==MapSize-1&&v==MapSize-1)
+	if (u == MapSize - 1 && v == MapSize - 1)
 	{
 		flag = true;
 		return;
 	}
-	if(MapArray[u][v]==1)
+	if (MapArray[u][v] == 1)
 		return;
-	for(int i=0;i<4;i++)
+	for (int i = 0; i < 4; i++)
 	{
-		if(Check(u+t[0][i],v+t[1][i]))
+		if (Check(u + t[0][i], v + t[1][i]))
 		{
-			MapArray[u+t[0][i]][v+t[1][i]] = -1;
-			DFS(u+t[0][i],v+t[1][i]);
+			MapArray[u + t[0][i]][v + t[1][i]] = -1;
+			DFS(u + t[0][i], v + t[1][i]);
 		}
 	}
 }
 bool CMap::Valid()
 {
 	flag = false;
-	DFS(0,0);
-	for(int i=0;i<MapSize;i++)
-		for(int j=0;j<MapSize;j++)
-			if(MapArray[i][j]==-1) MapArray[i][j] = 0;
+	DFS(0, 0);
+	for (int i = 0; i < MapSize; i++)
+		for (int j = 0; j < MapSize; j++)
+			if (MapArray[i][j] == -1) MapArray[i][j] = 0;
 	return flag;
 }
 void CMap::SetPath()
 {
 	srand( time( NULL ) );
 	vector<int> Index;
-	for(int i=0;i<MapSize*MapSize;i++)
+	for (int i = 0; i < MapSize * MapSize; i++)
 		Index.push_back(i);
-	std::random_shuffle(Index.begin(),Index.end(),myrandom);
-	for(int i=0;i<MapSize*MapSize;i++)
+	std::random_shuffle(Index.begin(), Index.end(), myrandom);
+	for (int i = 0; i < MapSize * MapSize; i++)
 	{
-		int u = Index[i]%MapSize;
-		int v = Index[i]/MapSize;
+		int u = Index[i] % MapSize;
+		int v = Index[i] / MapSize;
 		MapArray[u][v] = 1;
 		//cout<<"Erase: "<<u<<" "<<v<<endl;
-		if(!Valid())
-			MapArray[u][v]= 0;
+		if (!Valid())
+			MapArray[u][v] = 0;
 	}
 }
 
@@ -78,7 +78,7 @@ void CMap::PrintPosition()
 void CMap::AssignNewMap(int _MapSize)
 {
 	MapSize = _MapSize;
-	fill_n(&MapArray[0][0],sizeof(MapArray)/sizeof(MapArray[0][0]),0);
+	fill_n(&MapArray[0][0], sizeof(MapArray) / sizeof(MapArray[0][0]), 0);
 	SetPath();
 }
 void CMap::NextLevel()

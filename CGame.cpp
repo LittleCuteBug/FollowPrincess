@@ -1,7 +1,7 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\main.h>
 #include<C:\Users\quang\Desktop\FollowPrincess\CGame.h>
 
-CGame::CGame(int _life, int _level, int _MapSize){
+CGame::CGame(int _life, int _level, int _MapSize) {
 	Player.Setter(_life, _level);
 	Map.AssignNewMap(_MapSize);
 	Map.AssignNewPosition();
