@@ -70,8 +70,8 @@ int main(int argc, char* args[])
 					Game.NextLevel();
 				}
 				Game.SDLRenderingGame();
-				//Update the surface
-				SDL_UpdateWindowSurface( gWindow );
+				//Update screen
+				SDL_RenderPresent( gRenderer );
 
 			}
 		}

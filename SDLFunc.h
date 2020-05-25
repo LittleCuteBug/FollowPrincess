@@ -22,13 +22,12 @@ enum KeyPress
 };
 
 extern SDL_Window* gWindow;
-//The surface contained by the window
-extern SDL_Surface* gScreenSurface;
+extern SDL_Renderer* gRenderer;
 extern string Imagepath [];
-extern SDL_Surface* gImage[NumberOfImage];
+extern SDL_Texture* gImage[NumberOfImage];
 
 bool init();
-void RenderImage(SDL_Surface* Image, double x, double y, double w, double h);
-SDL_Surface* loadSurface( std::string path );
+void RenderImage(SDL_Texture* Image, double x, double y, double w, double h);
+SDL_Texture* loadTexture( string path );
 bool loadMedia();
 void close();
