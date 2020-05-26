@@ -12,7 +12,10 @@ string Imagepath [] = {
 	"Image/MapBombCellImage.png",
 	"Image/MapStartCellImage.png",
 	"Image/MapFinishCellImage.png",
-	"Image/PrincessImage.png"
+	"Image/PrincessImage.png",
+	"Image/WinningImage.png",
+	"Image/LosingImage.png",
+	"Image/BangImage.png",
 };
 SDL_Texture* gImage[NumberOfImage];
 

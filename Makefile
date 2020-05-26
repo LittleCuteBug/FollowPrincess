@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = src/main.cpp src/CPlayer.cpp src/CMap.cpp src/SDLFunc.cpp src/CGame.cpp src/SDLCGame.cpp
+OBJS = src/main.cpp src/CPlayer.cpp src/CMap.cpp src/SDLFunc.cpp src/CGame.cpp src/SDLCGame.cpp src/GameStatus.cpp
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = game

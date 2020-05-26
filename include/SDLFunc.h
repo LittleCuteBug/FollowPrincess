@@ -14,6 +14,9 @@ enum Image
 	MapStartCellImage,
 	MapFinishCellImage,
 	PrincessImage,
+	WinningImage,
+	LosingImage,
+	BangImage,
 	NumberOfImage
 };
 enum KeyPress
