@@ -13,6 +13,7 @@ public:
 	void NextLevel();
 	void PrintMap();
 	void PrintGame();
+	void SDLRenderingMap();
 	void SDLRenderingGame();
 	void Reset();
 	bool isDead();

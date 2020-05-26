@@ -25,8 +25,15 @@ void CGame::PrintGame()
 }
 void CGame::SDLRenderingGame()
 {
+	RenderImage(gImage[BackgroundImage], 0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	Map.SDLRenderingGame();	
 	Player.SDLRenderingGame();
-	Map.SDLRenderingGame();
+}
+void CGame::SDLRenderingMap()
+{
+	RenderImage(gImage[BackgroundImage], 0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	Map.SDLRenderingMap();
+	Player.SDLRenderingGame();
 }
 void CGame::Reset()
 {

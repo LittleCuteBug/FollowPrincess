@@ -1,11 +1,14 @@
 //Screen dimension constants
-const double SCREEN_WIDTH = 640;
-const double SCREEN_HEIGHT = 640;
+const double SCREEN_WIDTH = 1000;
+const double SCREEN_HEIGHT = 720;
+const double MAP_SIZE = 640;
+const double MAP_LOCATION = 40;
 //The window we'll be rendering to
 
 enum Image
 {
-	//BackGroundImage,
+	BackgroundImage,
+	MapCellImage,
 	MapSafeCellImage,
 	MapBombCellImage,
 	MapStartCellImage,

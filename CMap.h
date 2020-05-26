@@ -26,4 +26,5 @@ public:
 	void PrintMap();
 	void PrintGame();
 	void SDLRenderingGame();
+	void SDLRenderingMap();
 };

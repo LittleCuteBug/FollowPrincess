@@ -6,7 +6,8 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 string Imagepath [] = {
-	//"BackGroundImage.png",
+	"Image/BackgroundImage.png",
+	"Image/MapCellImage.png",
 	"Image/MapSafeCellImage.png",
 	"Image/MapBombCellImage.png",
 	"Image/MapStartCellImage.png",

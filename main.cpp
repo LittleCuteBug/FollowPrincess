@@ -1,5 +1,10 @@
 #include<C:\Users\quang\Desktop\FollowPrincess\main.h>
 #include<C:\Users\quang\Desktop\FollowPrincess\Cgame.h>
+enum Status
+{
+	Play,
+	Map
+};
 int main(int argc, char* args[])
 {
 	//Start up SDL and create window
@@ -18,58 +23,84 @@ int main(int argc, char* args[])
 		{
 			//Main loop flag
 			bool quit = false;
-
 			//Event handler
 			SDL_Event e;
 			CGame Game;
 			//While application is running
+			Status CASE = Map;
 			while ( !quit )
 			{
 				//Handle events on queue
-				while ( SDL_PollEvent( &e ) != 0 )
+				switch (CASE)
 				{
-					//User requests quit
-					if ( e.type == SDL_QUIT )
+				case Play:
+				{
+					while ( SDL_PollEvent( &e ) != 0 )
 					{
-						quit = true;
-					}
-
-					else if ( e.type == SDL_KEYDOWN )
-					{
-						//Select surfaces based on key press
-						switch ( e.key.keysym.sym )
+						//User requests quit
+						if ( e.type == SDL_QUIT )
 						{
-						case SDLK_UP:
-							Game.Move(GoUpKey);
-							break;
-						case SDLK_DOWN:
-							Game.Move(GoDownKey);
-							break;
-						case SDLK_LEFT:
-							Game.Move(GoLeftKey);
-							break;
-						case SDLK_RIGHT:
-							Game.Move(GoRightKey);
-							break;
+							quit = true;
+						}
+						else if ( e.type == SDL_KEYDOWN )
+						{
+							//Select surfaces based on key press
+							switch ( e.key.keysym.sym )
+							{
+							case SDLK_UP:
+								Game.Move(GoUpKey);
+								break;
+							case SDLK_DOWN:
+								Game.Move(GoDownKey);
+								break;
+							case SDLK_LEFT:
+								Game.Move(GoLeftKey);
+								break;
+							case SDLK_RIGHT:
+								Game.Move(GoRightKey);
+								break;
+							}
 						}
 					}
-				}
-				if (Game.isBomb())
-				{
-					Game.Reset();
-				}
-				if (Game.isDead())
-				{
-					cout << "Lose" << endl;
-					quit = true;
+					if (Game.isBomb())
+					{
+						Game.Reset();
+						CASE = Map;
+					}
+					if (Game.isDead())
+					{
+						cout << "Lose" << endl;
+						quit = true;
+						break;
+					}
+					if (Game.isWinning())
+					{
+						cout << "Win" << endl;
+						Game.NextLevel();
+						CASE = Map;
+					}
+					Game.SDLRenderingGame();
 					break;
 				}
-				if (Game.isWinning())
-				{
-					cout << "Win" << endl;
-					Game.NextLevel();
+				case Map:
+					while ( SDL_PollEvent( &e ) != 0 )
+					{
+						//User requests quit
+						if ( e.type == SDL_QUIT )
+						{
+							quit = true;
+						}
+						else if ( e.type == SDL_KEYDOWN )
+						{
+							if (e.key.keysym.sym == SDLK_SPACE)
+							{
+								CASE = Play;
+							}
+						}
+					}
+					Game.SDLRenderingMap();
+					break;
 				}
-				Game.SDLRenderingGame();
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 
