@@ -3,7 +3,41 @@
 
 void CPlayer::SDLRenderingGame()
 {
-	;
+	RenderImage(gImage[StatusImage],
+		0,0,
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT
+		);
+	// Rendering Level
+	int lv = Level;
+	double x = 940,y = 45;
+	while(lv!=0)
+	{
+		int digit = lv%10;
+		lv/=10;
+		RenderImage(gNumber[digit],
+			x,
+			y,
+			50*0.7,
+			70*0.7
+		);
+		x-=50*0.7;
+	}
+	//Rendering Life
+	int lf = Life;
+	x = 940,y = 100;
+	while(lf!=0)
+	{
+		int digit = lf%10;
+		lf/=10;
+		RenderImage(gNumber[digit],
+			x,
+			y,
+			50*0.6,
+			70*0.6
+		);
+		x-=50*0.6;
+	}
 }
 
 void CMap::SDLRenderingGame()
