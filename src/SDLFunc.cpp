@@ -16,8 +16,27 @@ string Imagepath [] = {
 	"Image/WinningImage.png",
 	"Image/LosingImage.png",
 	"Image/BangImage.png",
+	
+	"Image/StatusImage.png",
+	"Image/Button/NewGameButton.png",
+	"Image/Button/SaveButton.png",
+	"Image/Button/LoadButton.png",
+	"Image/Button/BackButton.png",
+	"Image/BackgroundMenuImage.png",
+	
+	"Image/Number/0.png",
+	"Image/Number/1.png",
+	"Image/Number/2.png",
+	"Image/Number/3.png",
+	"Image/Number/4.png",
+	"Image/Number/5.png",
+	"Image/Number/6.png",
+	"Image/Number/7.png",
+	"Image/Number/8.png",
+	"Image/Number/9.png"
 };
 SDL_Texture* gImage[NumberOfImage];
+SDL_Texture* gNumber[10];
 
 
 bool init()
@@ -121,9 +140,18 @@ bool loadMedia()
 		gImage[i] = loadTexture( Imagepath[i] );
 		if ( gImage[i] == NULL )
 		{
-			printf( "Failed to load ", Imagepath, "\n" );
+			printf( "Failed to load ", Imagepath[i], "\n" );
 			success = false;
 		}
+	}
+	for(int i = 0;i<10;i++)
+	{
+		gNumber[i] = loadTexture(Imagepath[NumberOfImage+i]);
+		if ( gNumber[i] == NULL )
+		{
+			printf( "Failed to load ", Imagepath[NumberOfImage+i], "\n" );
+			success = false;
+		}	
 	}
 	return success;
 }

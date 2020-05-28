@@ -17,6 +17,14 @@ enum Image
 	WinningImage,
 	LosingImage,
 	BangImage,
+
+	StatusImage,
+	NewGameButton,
+	SaveButton,
+	LoadButton,
+	BackButton,
+	BackgroundMenuImage,
+	
 	NumberOfImage
 };
 enum KeyPress
@@ -31,6 +39,7 @@ extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 extern string Imagepath [];
 extern SDL_Texture* gImage[NumberOfImage];
+extern SDL_Texture* gNumber[10];
 
 bool init();
 void RenderImage(SDL_Texture* Image, double x, double y, double w, double h);
