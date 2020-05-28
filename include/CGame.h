@@ -9,7 +9,7 @@ private:
 	CMap Map;
 
 public:
-	CGame(int _life = 10, int _level = 1, int _MapSize = 4);
+	CGame(int _life = 20, int _level = 1, int _MapSize = 4);
 	void NextLevel();
 	void PrintMap();
 	void PrintGame();
