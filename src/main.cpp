@@ -1,5 +1,5 @@
 #include "../include/main.h"
-#include "../include/GameStatus.h"
+#include "../include/GameState.h"
 
 int main(int argc, char* args[])
 {
@@ -17,38 +17,10 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-			//Main loop flag
 			bool quit = false;
-			//Event handler
 			SDL_Event e;
 			CGame Game;
-			//While application is running
-			Status CASE = Map;
-			while ( !quit )
-			{
-				//Handle events on queue
-				switch (CASE)
-				{
-				case Play:
-					CharacterMove(e,Game,quit,CASE);
-					break;
-				case Map:
-					ShowMap(e,Game,quit,CASE);
-					break;
-				case Reset:
-					ResetMap(e,Game,quit,CASE);
-					break;
-				case Lose:
-					AnnounceLosing(e,Game,quit,CASE);
-					break;
-				case Win:
-					AnnounceWinning(e,Game,quit,CASE);
-					break;
-				}
-				//Update screen
-				SDL_RenderPresent( gRenderer );
-				
-			}
+			PlayGame(Game,quit,e);
 		}
 	}
 
